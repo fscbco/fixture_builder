@@ -34,7 +34,7 @@ module FixtureBuilder
       # Rails 3.0 and earlier, create_fixtures returns an array of tuples
       created_fixtures.each do |fixture|
         name = fixture[0]
-        id = fixture[1]['id'].to_i
+        id = fixture[1]['id']
         table_name = fixture[1].model_class.table_name
         key = [table_name, id]
         @custom_names[key] = name
@@ -42,7 +42,7 @@ module FixtureBuilder
     end
 
     def record_name(record_hash, table_name, row_index)
-      key = [table_name, record_hash['id'].to_i]
+      key = [table_name, record_hash['id']]
       name = case
                when name_proc = @model_name_procs[table_name]
                  name_proc.call(record_hash, row_index.succ!)
